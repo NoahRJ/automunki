@@ -65,6 +65,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RW_REPO_TOKEN }}
         MUNKI_WEBSITE: ${{ secrets.MUNKI_WEBSITE }}
 
+    - name: Print recipe receipt
+      run: |
+        /usr/bin/find /Users/runner/Library/AutoPkg/Cache -type f -iname "*Figma*receipt*plist" -exec plutil -p "{}" \;
+
     - name: Commit autopkg_metadata
       run: |
         /bin/cp /private/tmp/autopkg_metadata.json "$GITHUB_WORKSPACE"/autopkg_src/autopkg_metadata.json
