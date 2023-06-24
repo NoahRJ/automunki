@@ -68,6 +68,7 @@ jobs:
     - name: Print recipe receipt
       run: |
         /usr/bin/find /Users/runner/Library/AutoPkg/Cache -type f -iname "*Adobe*receipt*plist" -exec plutil -p "{}" \;
+        /usr/bin/find /Users/runner/Library/AutoPkg/Cache -type f -iname "*Blender*receipt*plist" -exec plutil -p "{}" \;
         /usr/bin/find /Users/runner/Library/AutoPkg/Cache -type f -iname "*Firefox*receipt*plist" -exec plutil -p "{}" \;
 
     - name: Commit autopkg_metadata
