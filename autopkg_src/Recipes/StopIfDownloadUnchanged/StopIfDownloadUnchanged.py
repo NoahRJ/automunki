@@ -23,11 +23,12 @@ class StopIfDownloadUnchanged(Processor):
         """Loops until AutoPkg env download_changed is defined
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
-        while self.download_changed is None:
+        while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
             try:
                 self.download_changed = self.env["download_changed"]
                 if self.download_changed == False:
                     self.env["stop_processing_recipe"] = True
+                return
             except KeyError:
                 continue
 
@@ -35,6 +36,8 @@ class StopIfDownloadUnchanged(Processor):
         """Sets initial DL changed value to None
         Sets get_download_changed func as bg func
         Starts it to run in parallels with AutoPkg recipe execution"""
+        print("Stop Download proc now running")
+        self.output("Stop Download proc now running")
         self.download_changed = None
         bg_thread = threading.Thread(target=self.get_download_changed)
         bg_thread.start()
