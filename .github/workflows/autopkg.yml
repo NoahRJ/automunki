@@ -45,6 +45,8 @@ jobs:
         /bin/mkdir -p /Users/runner/Library/AutoPkg/
         /bin/ln -s "$GITHUB_WORKSPACE"/autopkg_src/Recipes /Users/runner/Library/AutoPkg/
         /bin/cp "$GITHUB_WORKSPACE"/autopkg_src/autopkg_metadata.json /private/tmp/autopkg_metadata.json
+        /usr/bin/sw_vers
+        /usr/sbin/system_profiler SPHardwareDataType
 
     - name: Configure AutoPkg Repos
       run: |
