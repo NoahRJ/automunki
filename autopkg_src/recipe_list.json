@@ -1,4 +1,5 @@
 [
    "Firefox.munki.recipe",
+    "Blender.munki.recipe",
    "AdobeReader.munki.recipe"
 ]
