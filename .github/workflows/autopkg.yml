@@ -88,6 +88,10 @@ jobs:
     #   run: |
     #     aws s3 sync ./pkgs/ s3://${{secrets.AWS_S3_BUCKET}}/pkgs/
 
+    - name: Print Log
+      run: |
+        /bin/cat /var/tmp/autopkg/autopkg.log
+
     - name: Gather Logs
       run: |
         /usr/bin/tar -czvf /var/tmp/autopkg.tar.gz /var/tmp/autopkg/
