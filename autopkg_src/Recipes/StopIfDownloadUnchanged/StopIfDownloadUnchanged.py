@@ -30,7 +30,7 @@ class StopIfDownloadUnchanged(Processor):
                 if not self.download_changed:
                     self.env["stop_processing_recipe"] = True
                 # return 0
-        return True
+        #return True
 
     def main(self):
         # self.env["stop_processing_recipe"] = True
@@ -44,7 +44,7 @@ class StopIfDownloadUnchanged(Processor):
         bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
         bg_proc.daemon = True
         bg_proc.start()
-        exit(0)
+        #exit(0)
 
 
 if __name__ == "__main__":
