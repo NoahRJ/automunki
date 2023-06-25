@@ -1,7 +1,7 @@
 #!/usr/local/autopkg/python
 # Created 06/22/23; NRJA
 
-import threading
+import multiprocessing
 
 from autopkglib import Processor
 
@@ -23,6 +23,7 @@ class StopIfDownloadUnchanged(Processor):
         """Loops until AutoPkg env download_changed is defined
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
+        # while True::
         while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
             if "download_changed" in self.env:
                 self.download_changed = self.env["download_changed"]
@@ -48,8 +49,8 @@ class StopIfDownloadUnchanged(Processor):
         print("Stop Download proc now running")
         self.output("Stop Download proc now running")
         self.download_changed = None
-        bg_thread = threading.Thread(target=self.get_download_changed)
-        bg_thread.start()
+        bg_proc = multiprocessing.Process(target=self.get_download_changed)
+        bg_proc.start()
 
 
 if __name__ == "__main__":
