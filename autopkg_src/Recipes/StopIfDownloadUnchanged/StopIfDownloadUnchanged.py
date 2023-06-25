@@ -30,16 +30,9 @@ class StopIfDownloadUnchanged(Processor):
                 self.download_changed = self.env["download_changed"]
                 if not self.download_changed:
                     self.env["stop_processing_recipe"] = True
-                return
-        #
-        # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
-        #     try:
-        #         self.download_changed = self.env["download_changed"]
-        #         if self.download_changed == False:
-        #             self.env["stop_processing_recipe"] = True
-        #         return
-        #     except KeyError:
-        #         continue
+                exit(0)
+                #return
+        exit(0)
 
     def main(self):
         # self.env["stop_processing_recipe"] = True
@@ -51,6 +44,7 @@ class StopIfDownloadUnchanged(Processor):
         self.output("Stop Download proc now running")
         self.download_changed = None
         bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
+        bg_proc.daemon = True
         bg_proc.start()
         exit(0)
 
