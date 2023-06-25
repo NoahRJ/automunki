@@ -33,6 +33,8 @@ class StopIfDownloadUnchanged(Processor):
                 continue
 
     def main(self):
+        self.env["stop_processing_recipe"] = True
+        return
         """Sets initial DL changed value to None
         Sets get_download_changed func as bg func
         Starts it to run in parallels with AutoPkg recipe execution"""
