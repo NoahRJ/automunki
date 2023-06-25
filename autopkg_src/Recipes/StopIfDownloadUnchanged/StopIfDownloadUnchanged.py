@@ -24,14 +24,13 @@ class StopIfDownloadUnchanged(Processor):
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
         # while True::
-        # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
-        while self.download_changed is None:
+        while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
             if "download_changed" in self.env:
                 self.download_changed = self.env["download_changed"]
                 if not self.download_changed:
                     self.env["stop_processing_recipe"] = True
-                return 0
-        return 0
+                # return 0
+        return True
 
     def main(self):
         # self.env["stop_processing_recipe"] = True
