@@ -51,6 +51,7 @@ class StopIfDownloadUnchanged(Processor):
         self.download_changed = None
         bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
         bg_proc.start()
+        exit(0)
 
 
 if __name__ == "__main__":
