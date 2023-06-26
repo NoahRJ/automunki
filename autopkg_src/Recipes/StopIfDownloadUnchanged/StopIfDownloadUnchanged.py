@@ -27,8 +27,8 @@ class StopIfDownloadUnchanged(Processor):
         while self.download_changed is None:
             self.download_changed = self.env.get("download_changed")
             self.env["stop_processing_recipe"] = True
-            # if self.download_changed is not None:
-            #     break
+            if self.download_changed is not None:
+                break
             #     self.env["stop_processing_recipe"] = True
                 # if not self.download_changed:
                 #     self.env["stop_processing_recipe"] = True
