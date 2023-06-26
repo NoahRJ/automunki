@@ -26,10 +26,14 @@ class StopIfDownloadUnchanged(Processor):
         # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
         # while True:
         # time.sleep(1)
-        while True:
-            if self.env.get("download_changed") is False:
+        while self.download_changed is None:
+            if "download_changed" in self.env:
                 self.env["stop_processing_recipe"] = True
-                break
+                self.download_changed = self.env.get("download_changed")
+                #break
+            # if self.env.get("download_changed") is False:
+            #     self.env["stop_processing_recipe"] = True
+            #     break
         # while self.download_changed is None:
             # self.download_changed = self.env.get("download_changed")
             # if self.env.get("download_changed") is False:
