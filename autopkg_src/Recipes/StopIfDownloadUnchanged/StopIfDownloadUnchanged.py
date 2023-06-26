@@ -7,15 +7,14 @@ from autopkglib import Processor
 
 __all__ = ["StopIfDownloadUnchanged"]
 
-
 class StopIfDownloadUnchanged(Processor):
-    description = (
-        "Aborts a recipe run if download_changed value is defined and set to False"
-    )
+    description = ( "Aborts a recipe run if download_changed value is defined and set to False" )
     input_variables = {}
 
     output_variables = {
-        "stop_processing_recipe": {"description": "Bool to stop eval of recipe"}
+        "stop_processing_recipe": {
+            "description": "Bool to stop eval of recipe"
+        }
     }
     __doc__ = description
 
@@ -23,42 +22,25 @@ class StopIfDownloadUnchanged(Processor):
         """Loops until AutoPkg env download_changed is defined
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
-        while self.download_changed is None:
-            self.download_changed = self.env.get("download_changed") if self.env.get("download_changed") else None
-            if self.download_changed is not None:
-                self.env["stop_processing_recipe"] = True
-                break
+        while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
+            try:
+                self.download_changed = self.env[ "download_changed" ]
+                if self.download_changed == False:
+                    self.env[ "stop_processing_recipe" ] = True
+                    break
+            except KeyError:
+                continue
 
-        self.env["stop_processing_recipe"] = True
-
-        # while "download_changed" not in self.env:
-        # while self.env.get("AUTOPKG_VERSION"):
-        #     continue
-        # self.env["stop_processing_recipe"] = True
-        # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
-        #     if "download_changed" in self.env:
-        #         self.download_changed = self.env["download_changed"]
-        #         if not self.download_changed:
-        #             self.env["stop_processing_recipe"] = True
-        #             #exit(0)
-        #         return True
-        # return True
 
     def main(self):
-        # self.env["stop_processing_recipe"] = True
-        # return
         """Sets initial DL changed value to None
         Sets get_download_changed func as bg func
         Starts it to run in parallels with AutoPkg recipe execution"""
-        print("Stop Download proc now running")
-        self.output("Stop Download proc now running")
         self.download_changed = None
-        bg_proc = threading.Thread(target=self.get_download_changed)
-        # bg_proc.daemon = True
-        bg_proc.start()
-        #exit(0)
+        bg_thread = threading.Thread(target=self.get_download_changed)
+        bg_thread.start()
 
-
-if __name__ == "__main__":
+if __name__ == '__main__':
     processor = StopIfDownloadUnchanged()
     processor.execute_shell()
+  
