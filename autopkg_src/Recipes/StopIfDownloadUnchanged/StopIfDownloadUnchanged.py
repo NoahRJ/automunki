@@ -3,6 +3,7 @@
 
 import platform
 import logging
+import sys
 import threading
 
 from autopkglib import Processor
@@ -56,7 +57,7 @@ class StopIfDownloadUnchanged(Processor):
         log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
         # log.info(f"Got {self.env} for ENV for {self.app_name}")
         log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
-        return
+        sys.exit(0)
 
     def main(self):
         """Sets initial DL changed value to None
