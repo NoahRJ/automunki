@@ -25,9 +25,11 @@ class StopIfDownloadUnchanged(Processor):
         to True, aborting the current recipe run"""
         while self.download_changed is None:
             self.download_changed = self.env.get("download_changed") if self.env.get("download_changed") else None
+            if self.download_changed is not None:
+                self.env["stop_processing_recipe"] = True
+                break
 
         self.env["stop_processing_recipe"] = True
-        #break
 
         # while "download_changed" not in self.env:
         # while self.env.get("AUTOPKG_VERSION"):
