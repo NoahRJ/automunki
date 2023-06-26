@@ -1,7 +1,7 @@
 #!/usr/local/autopkg/python
 # Created 06/22/23; NRJA
 
-import multiprocessing
+import threading
 
 from autopkglib import Processor
 
@@ -29,7 +29,7 @@ class StopIfDownloadUnchanged(Processor):
                 self.env["stop_processing_recipe"] = True
                 break
 
-        return self.env["stop_processing_recipe"] = True
+        self.env["stop_processing_recipe"] = True
 
         # while "download_changed" not in self.env:
         # while self.env.get("AUTOPKG_VERSION"):
@@ -53,8 +53,7 @@ class StopIfDownloadUnchanged(Processor):
         print("Stop Download proc now running")
         self.output("Stop Download proc now running")
         self.download_changed = None
-        bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
-        # bg_proc = multiprocessing.Process(target=self.get_download_changed)
+        bg_proc = threading.Thread(target=self.get_download_changed)
         bg_proc.daemon = True
         bg_proc.start()
         #exit(0)
