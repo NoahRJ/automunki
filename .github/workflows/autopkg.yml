@@ -65,6 +65,10 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.RW_REPO_TOKEN }}
         MUNKI_WEBSITE: ${{ secrets.MUNKI_WEBSITE }}
 
+    - name: Print DL Log
+      run: |
+        /bin/cat /var/tmp/stop_if_dl_same.log
+
     - name: Print recipe receipt
       run: |
         /usr/bin/find /Users/runner/Library/AutoPkg/Cache -type f -iname "*Adobe*receipt*plist" -exec plutil -p "{}" \;
