@@ -23,45 +23,9 @@ class StopIfDownloadUnchanged(Processor):
         """Loops until AutoPkg env download_changed is defined
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
-        # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
-        # while True:
-        # time.sleep(1)
-        # while self.download_changed is None:
         while "download_changed" not in self.env:
             pass
-        else:
-            self.env["stop_processing_recipe"] = True
-                #break
-        #         self.stop_processing_recipe = True
-        #         self.download_changed = self.env["download_changed"]
-        #
-        # while self.download_changed is None:
-        #     if "download_changed" in self.env:
-        #         self.env["stop_processing_recipe"] = True
-        #         self.download_changed = self.env.get("download_changed")
-                #break
-            # if self.env.get("download_changed") is False:
-            #     self.env["stop_processing_recipe"] = True
-            #     break
-        # while self.download_changed is None:
-            # self.download_changed = self.env.get("download_changed")
-            # if self.env.get("download_changed") is False:
-            #     self.env["stop_processing_recipe"] = True
-            #     break
-            # if self.download_changed is False:
-            #     self.env["stop_processing_recipe"] = True 
-        # return self.env["stop_processing_recipe"]
-        # while self.download_changed is None:
-        #     self.download_changed = self.env.get("download_changed")
-        # else:
-        #     self.env["stop_processing_recipe"] = True
-        # return
-        # if self.download_changed is not None:
-        #     break
-            #     self.env["stop_processing_recipe"] = True
-                # if not self.download_changed:
-                #     self.env["stop_processing_recipe"] = True
-                # break
+        self.env["stop_processing_recipe"] = True
 
     def main(self):
         """Sets initial DL changed value to None
