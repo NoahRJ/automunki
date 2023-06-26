@@ -2,6 +2,7 @@
 # Created 06/22/23; NRJA
 
 import threading
+import time
 
 from autopkglib import Processor
 
@@ -24,11 +25,13 @@ class StopIfDownloadUnchanged(Processor):
         to True, aborting the current recipe run"""
         # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
         # while True:
-        while self.download_changed is None:
-            self.download_changed = self.env.get("download_changed")
-        else:
-            self.env["stop_processing_recipe"] = True
-        return
+        time.sleep(1)
+        self.env["stop_processing_recipe"] = True
+        # while self.download_changed is None:
+        #     self.download_changed = self.env.get("download_changed")
+        # else:
+        #     self.env["stop_processing_recipe"] = True
+        # return
         # if self.download_changed is not None:
         #     break
             #     self.env["stop_processing_recipe"] = True
@@ -41,9 +44,9 @@ class StopIfDownloadUnchanged(Processor):
         Sets get_download_changed func as bg func
         Starts it to run in parallels with AutoPkg recipe execution"""
         self.download_changed = None
-        self.env["stop_processing_recipe"] = True
-        # bg_thread = threading.Thread(target=self.get_download_changed)
-        # bg_thread.start()
+        # self.env["stop_processing_recipe"] = True
+        bg_thread = threading.Thread(target=self.get_download_changed)
+        bg_thread.start()
 
 if __name__ == '__main__':
     processor = StopIfDownloadUnchanged()
