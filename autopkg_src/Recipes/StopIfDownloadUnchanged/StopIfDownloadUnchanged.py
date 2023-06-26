@@ -26,7 +26,10 @@ class StopIfDownloadUnchanged(Processor):
         # while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
         # while True:
         # time.sleep(1)
-        self.env["stop_processing_recipe"] = True
+        while self.download_changed is None:
+            self.download_changed = self.env.get("download_changed")
+            if self.download_changed is False:
+                self.env["stop_processing_recipe"] = True 
         # return self.env["stop_processing_recipe"]
         # while self.download_changed is None:
         #     self.download_changed = self.env.get("download_changed")
@@ -45,7 +48,6 @@ class StopIfDownloadUnchanged(Processor):
         Sets get_download_changed func as bg func
         Starts it to run in parallels with AutoPkg recipe execution"""
         self.download_changed = None
-        # self.env["stop_processing_recipe"] = True
         bg_thread = threading.Thread(target=self.get_download_changed)
         bg_thread.start()
 
