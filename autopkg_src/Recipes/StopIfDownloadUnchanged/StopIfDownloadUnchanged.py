@@ -54,7 +54,7 @@ class StopIfDownloadUnchanged(Processor):
         self.output("Stop Download proc now running")
         self.download_changed = None
         bg_proc = threading.Thread(target=self.get_download_changed)
-        bg_proc.daemon = True
+        # bg_proc.daemon = True
         bg_proc.start()
         #exit(0)
 
