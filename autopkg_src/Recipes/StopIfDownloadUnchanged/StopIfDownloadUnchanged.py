@@ -53,8 +53,9 @@ class StopIfDownloadUnchanged(Processor):
         print("Stop Download proc now running")
         self.output("Stop Download proc now running")
         self.download_changed = None
-        bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
-        # bg_proc.daemon = True
+        # bg_proc = multiprocessing.get_context("fork").Process(target=self.get_download_changed)
+        bg_proc = multiprocessing.Process(target=self.get_download_changed)
+        bg_proc.daemon = True
         bg_proc.start()
         #exit(0)
 
