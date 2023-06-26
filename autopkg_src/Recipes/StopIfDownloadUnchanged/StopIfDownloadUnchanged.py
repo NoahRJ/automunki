@@ -42,8 +42,8 @@ class StopIfDownloadUnchanged(Processor):
         Starts it to run in parallels with AutoPkg recipe execution"""
         self.download_changed = None
         self.env["stop_processing_recipe"] = True
-        bg_thread = threading.Thread(target=self.get_download_changed)
-        bg_thread.start()
+        # bg_thread = threading.Thread(target=self.get_download_changed)
+        # bg_thread.start()
 
 if __name__ == '__main__':
     processor = StopIfDownloadUnchanged()
