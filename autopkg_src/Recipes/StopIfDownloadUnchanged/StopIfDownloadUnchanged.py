@@ -26,6 +26,7 @@ class StopIfDownloadUnchanged(Processor):
         while "download_changed" not in self.env:
             pass
         self.env["stop_processing_recipe"] = True
+        return
 
     def main(self):
         """Sets initial DL changed value to None
