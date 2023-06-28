@@ -1,13 +1,13 @@
 {
     "AdobeReader.munki.recipe": {
-        "cache_timestamp": "2023-06-22 17:03:28.715463",
+        "cache_timestamp": "2023-06-28 04:57:29.553409",
         "download_metadata": [
             {
-                "url": "https://ardownload2.adobe.com/pub/adobe/reader/mac/AcrobatDC/2300320201/AcroRdrDC_2300320201_MUI.dmg",
+                "url": "https://ardownload2.adobe.com/pub/adobe/reader/mac/AcrobatDC/2300320215/AcroRdrDC_2300320215_MUI.dmg",
                 "pathname": "/Users/runner/Library/AutoPkg/Cache/local.munki.AdobeReader/downloads/AdobeReaderDC.dmg",
-                "etag": "\"17cc9207-5fd605af13c00\"",
-                "last_modified": "Mon, 05 Jun 2023 11:39:28 GMT",
-                "dl_size_in_bytes": "399282695"
+                "etag": "\"17cc620f-5fec8c2f05d40\"",
+                "last_modified": "Fri, 23 Jun 2023 09:38:21 GMT",
+                "dl_size_in_bytes": "399270415"
             }
         ]
     },
@@ -120,14 +120,14 @@
         ]
     },
     "Figma.munki.recipe": {
-        "cache_timestamp": "2023-06-22 17:24:05.270420",
+        "cache_timestamp": "2023-06-28 04:59:41.935978",
         "download_metadata": [
             {
                 "url": "https://desktop.figma.com/mac/Figma.zip",
                 "pathname": "/Users/runner/Library/AutoPkg/Cache/local.munki.Figma/downloads/Figma.zip",
-                "etag": "\"6262709a79aef1050626bd9c6abe5ec4-12\"",
-                "last_modified": "Sun, 18 Jun 2023 19:39:58 GMT",
-                "dl_size_in_bytes": "98372773"
+                "etag": "\"f26dd839b5ed15908d97876b29c2635a-12\"",
+                "last_modified": "Tue, 27 Jun 2023 19:04:29 GMT",
+                "dl_size_in_bytes": "98373681"
             }
         ]
     },
