@@ -46,15 +46,15 @@ class StopIfDownloadUnchanged(Processor):
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
         log.info(f"Starting background thread for {self.app_name}...")
-        if "download_changed" not in self.env:
-            log.warning(f"download_changed not in self.env for {self.app_name}")
+        # if "download_changed" not in self.env:
+        #     log.warning(f"download_changed not in self.env for {self.app_name}")
         while "download_changed" not in self.env:
             pass
         if self.env.get("download_changed") is False:
             self.env["stop_processing_recipe"] = True
-        log.info(f"download_changed now in self.env for {self.app_name}")
-        log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
-        log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
+        # log.info(f"download_changed now in self.env for {self.app_name}")
+        # log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
+        # log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
         return
 
     def main(self):
@@ -63,7 +63,7 @@ class StopIfDownloadUnchanged(Processor):
         Starts it to run in parallels with AutoPkg recipe execution"""
         self.download_changed = None
         self.app_name = self.env.get("NAME")
-        log.info(f"Got {self.app_name} for app name")
+        # log.info(f"Got {self.app_name} for app name")
         bg_thread = threading.Thread(target=self.get_download_changed)
         bg_thread.start()
 
