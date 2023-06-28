@@ -3,7 +3,6 @@
 
 import platform
 import logging
-import sys
 import threading
 
 from autopkglib import Processor
@@ -47,18 +46,17 @@ class StopIfDownloadUnchanged(Processor):
         If defined as False, sets AutoPkg env stop_processing_recipe
         to True, aborting the current recipe run"""
         log.info(f"Starting background thread for {self.app_name}...")
-        self.env["stop_processing_recipe"] = True
-        # if "download_changed" not in self.env:
-        #     log.warning(f"download_changed not in self.env for {self.app_name}")
-        while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
-            self.download_changed = self.env.get("download_changed")
-            if self.download_changed is True:
-                self.env["stop_processing_recipe"] = False
-                return True
+        if "download_changed" not in self.env:
+            log.warning(f"download_changed not in self.env for {self.app_name}")
+        while "download_changed" not in self.env:
+            pass
+        if self.env.get("download_changed") is False:
+            self.env["stop_processing_recipe"] = True
         log.info(f"download_changed now in self.env for {self.app_name}")
         log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
+        # log.info(f"Got {self.env} for ENV for {self.app_name}")
         log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
-        return True
+        return
 
     def main(self):
         """Sets initial DL changed value to None
@@ -73,4 +71,3 @@ class StopIfDownloadUnchanged(Processor):
 if __name__ == '__main__':
     processor = StopIfDownloadUnchanged()
     processor.execute_shell()
-  
