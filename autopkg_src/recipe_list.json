@@ -1,5 +1,12 @@
 [
    "AdobeReader.munki.recipe",
-   "Blender.munki.recipe",
-   "Firefox.munki.recipe"
+   "BlueJeans.munki.recipe",
+   "Brave.munki.recipe",
+   "Cyberduck.munki.recipe",
+   "Figma.munki.recipe",
+   "Firefox.munki.recipe",
+   "GIMP.munki.recipe",
+   "iTerm2.munki.recipe",
+   "Slack.munki.recipe",
+   "VLC.munki.recipe"
 ]
