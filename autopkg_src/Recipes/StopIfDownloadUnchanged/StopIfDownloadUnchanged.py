@@ -48,16 +48,17 @@ class StopIfDownloadUnchanged(Processor):
         to True, aborting the current recipe run"""
         log.info(f"Starting background thread for {self.app_name}...")
         self.env["stop_processing_recipe"] = True
-        if "download_changed" not in self.env:
-            log.warning(f"download_changed not in self.env for {self.app_name}")
+        # if "download_changed" not in self.env:
+        #     log.warning(f"download_changed not in self.env for {self.app_name}")
         while self.download_changed is None and self.env.get("AUTOPKG_VERSION"):
             self.download_changed = self.env.get("download_changed")
             if self.download_changed is True:
                 self.env["stop_processing_recipe"] = False
+                return True
         log.info(f"download_changed now in self.env for {self.app_name}")
         log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
         log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
-        return
+        return True
 
     def main(self):
         """Sets initial DL changed value to None
