@@ -50,14 +50,14 @@ class StopIfDownloadUnchanged(Processor):
         self.env["stop_processing_recipe"] = True
         if "download_changed" not in self.env:
             log.warning(f"download_changed not in self.env for {self.app_name}")
-        while "download_changed" not in self.env:
-            pass
-        if self.env.get("download_changed") is True:
-            self.env["stop_processing_recipe"] = False
+        while self.download_changed is None:
+            self.download_changed = self.env.get("download_changed")
+            if self.download_changed is True:
+                self.env["stop_processing_recipe"] = False
         log.info(f"download_changed now in self.env for {self.app_name}")
         log.info(f"Got {self.env.get('download_changed')} for DL changed for {self.app_name}")
         log.info(f"Got {self.env.get('stop_processing_recipe')} for stop_processing_recipe")
-        return
+        # return
 
     def main(self):
         """Sets initial DL changed value to None
